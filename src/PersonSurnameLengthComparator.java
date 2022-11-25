@@ -13,11 +13,13 @@ public class PersonSurnameLengthComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person o1, Person o2) {
-        if (o1.getSurname().length() > maxSurnameLehgth && o2.getSurname().length() > maxSurnameLehgth) {
+        int quantityWords1 = o1.getSurname().split("(?U)\\W").length;
+        int quantityWords2 = o2.getSurname().split("(?U)\\W").length;
+        if (quantityWords1 > maxSurnameLehgth && quantityWords2 > maxSurnameLehgth) {
             return 0 - Integer.compare(o1.getAge(), o2.getAge());
         } else {
-            int result = 0 - Integer.compare(o1.getSurname().length(), o2.getSurname().length());
-            return result == 0 ? (0 - Integer.compare(o1.getAge(), o2.getAge())) : result;
+            int result = 0 - Integer.compare(quantityWords1, quantityWords2);
+            return result == 0 ? (0 -Integer.compare(o1.getAge(), o2.getAge())) : result;
         }
     }
 }
